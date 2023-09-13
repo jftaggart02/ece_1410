@@ -14,11 +14,12 @@ Store data in struct array.
 3. Print struct data to output file.
 */
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cstdlib>
-#include <iomanip>
+#include <iostream> // For cin and cout
+#include <fstream> // For reading and writing to files
+#include <string> // For string functionality
+#include <cstdlib> // For exit() and EXIT_FAILURE
+#include <iomanip> // For setting output float precision
+#include <cstdio> // For EOF macro
 
 #define ALPHABET_SIZE 26
 
@@ -78,7 +79,7 @@ void openFile(ifstream &ifile, ofstream &ofile) {
 
     // Check for errors.
     if (!ifile.is_open()) {
-        cout << "Error opening file " << if_name << "." << endl;
+        cout << "Error opening file \"" << if_name << "\"." << endl;
         exit(EXIT_FAILURE);
     }
     if (!ofile.is_open()) {
@@ -97,10 +98,10 @@ void count(ifstream &ifile, struct letter letters[])
 
     // Until end of file is reached, count each letter
     // and update array of structs accordingly.
-    while (!ifile.eof()) {
+    while (ifile.get(char_read)) {
 
-        // Get character from file
-        ifile >> char_read;
+        // For debugging:
+        // cout << char_read << endl;
 
         // If character read is a letter
         if (is_letter(char_read)) {
