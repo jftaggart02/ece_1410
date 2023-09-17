@@ -1,8 +1,8 @@
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <cmath>
-#include <iomanip>
+#include <fstream> // For reading and writing to files
+#include <iostream> // For printing to screen
+#include <string> // For use of strings
+#include <cmath> // For sqrt()
+#include <iomanip> // For setting cout floating-point precision
 #define EXIT_FAILURE 1
 
 using namespace std;
@@ -10,7 +10,6 @@ using namespace std;
 void open_file(fstream &file, string file_name);
 void compute_roots(fstream &ifile);
 void compute_roots(fstream &ifile, fstream &ofile);
-
 
 int main(int argc, char *argv[]) {
     
@@ -81,10 +80,10 @@ void compute_roots(fstream &ifile) {
     // Roots of quadratic equation
     float root1, root2;
 
-    // Set precision of output
+    // Set precision of floats printed
     cout << fixed << setprecision(4);
 
-    // While there's stuff in the file to read
+    // While there's stuff in the input file to read
     while (!ifile.eof()) {
 
         // Read 3 integers
@@ -92,7 +91,7 @@ void compute_roots(fstream &ifile) {
         ifile >> bi;
         ifile >> ci;
 
-        // Add to output string
+        // Print those to console
         cout << ai << "\t" << bi << "\t" << ci << "\t";
 
         // Convert to floats for calculation
@@ -103,7 +102,6 @@ void compute_roots(fstream &ifile) {
         // Check for a = 0 (can't divide by 0)
         if (ai == 0) {
 
-            // Debugging:
             cout << "cannot divide by 0" << endl;
 
         }
@@ -111,7 +109,6 @@ void compute_roots(fstream &ifile) {
         // Check for complex roots
         else if ( (b*b - 4*a*c) < 0 ) {
 
-            // Debugging:
             cout << "complex roots, did not compute" << endl;
 
         }
@@ -123,7 +120,7 @@ void compute_roots(fstream &ifile) {
             root1 = ( -b + sqrt(b*b - 4*a*c) ) / (2*a);
             root2 = ( -b - sqrt(b*b - 4*a*c) ) / (2*a);
 
-            // Add to output string
+            // Print roots to console
             cout << root1 << "\t" << root2 << endl;
 
         }
@@ -143,10 +140,10 @@ void compute_roots(fstream &ifile, fstream &ofile) {
     // Roots of quadratic equation
     float root1, root2;
 
-    // Set output precision
+    // Set precision of floats written to file
     ofile << fixed << setprecision(4);
 
-    // While there's stuff in the file to read
+    // While there's stuff in the input file to read
     while (!ifile.eof()) {
 
         // Read 3 integers
@@ -154,7 +151,7 @@ void compute_roots(fstream &ifile, fstream &ofile) {
         ifile >> bi;
         ifile >> ci;
 
-        // Add to output string
+        // Write them to output file
         ofile << ai << "\t" << bi << "\t" << ci << "\t";
 
         // Convert to floats for calculation
@@ -165,7 +162,6 @@ void compute_roots(fstream &ifile, fstream &ofile) {
         // Check for a = 0 (can't divide by 0)
         if (ai == 0) {
 
-            // Add error message to output string
             ofile << "cannot divide by 0" << endl;
 
         }
@@ -173,7 +169,6 @@ void compute_roots(fstream &ifile, fstream &ofile) {
         // Check for complex roots
         else if ( (b*b - 4*a*c) < 0 ) {
             
-            // Add error message to output string
             ofile << "complex roots, did not compute" << endl;
 
         }
@@ -185,7 +180,7 @@ void compute_roots(fstream &ifile, fstream &ofile) {
             root1 = ( -b + sqrt(b*b - 4*a*c) ) / (2*a);
             root2 = ( -b - sqrt(b*b - 4*a*c) ) / (2*a);
 
-            // Add to output string
+            // Write to output file
             ofile << root1 << "\t" << root2 << endl;
 
         }
