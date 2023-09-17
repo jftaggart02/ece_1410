@@ -83,11 +83,10 @@ void compute_roots(fstream &ifile) {
     // Set precision of floats printed
     cout << fixed << setprecision(4);
 
-    // While there's stuff in the input file to read
-    while (!ifile.eof()) {
+    // While there's stuff in the input file to read, read 1st integer
+    while (ifile >> ai) {
 
-        // Read 3 integers
-        ifile >> ai;
+        // Read the other 2 integers
         ifile >> bi;
         ifile >> ci;
 
@@ -143,11 +142,10 @@ void compute_roots(fstream &ifile, fstream &ofile) {
     // Set precision of floats written to file
     ofile << fixed << setprecision(4);
 
-    // While there's stuff in the input file to read
-    while (!ifile.eof()) {
+    // While there's stuff in the input file to read, read first integer
+    while (ifile >> ai) {
 
-        // Read 3 integers
-        ifile >> ai;
+        // Read the other 2 integers
         ifile >> bi;
         ifile >> ci;
 
