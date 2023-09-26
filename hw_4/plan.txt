@@ -1,0 +1,84 @@
+How to reduce fractions:
+
+Loop
+
+    Divide both numerator and denominator by n, which starts at 2 and increases by one each loop iteration.
+
+    If the remainder is 0 for both, set numerator and denominator to new divided values.
+
+    Stop when n becomes larger than either the numerator or denominator.
+
+    Run this loop over and over until n becomes larager than the numerator or denominator.
+
+Endloop
+
+Code:
+
+for (int i = 2; i <= m_numerator || i <= m_denominator; i++) {
+
+    int n_remainder = m_numerator % i;
+    int d_remainder = m_denominator % i;
+
+    if (n_remainder == 0 && d_remainder == 0) {
+
+        m_numerator = m_numerator / i;
+        m_denominator = m_denominator / i;
+        break;
+
+    }
+
+}
+
+Updated Code:
+
+bool fully_reduced = false;
+
+while (!fully_reduced) {
+
+    for (int i = 2; i <= m_numerator || i <= m_denominator; i++) {
+
+        int n_remainder = m_numerator % i;
+        int d_remainder = m_denominator % i;
+
+        if (n_remainder == 0 && d_remainder == 0) {
+
+            m_numerator = m_numerator / i;
+            m_denominator = m_denominator / i;
+            break;
+
+        }
+
+        if (i == m_numerator || i == m_denominator) {
+
+            fully_reduced = true;
+            break;
+
+        }
+
+    }
+
+}
+
+Main program flow:
+
+1. Ask for initial numerator and denominator.
+2. Enter loop
+    1. Select operation
+    2. Perform operation
+
+Illegal input?
+- denominator cannot be 0
+- check for floats? It might be fine if they're just truncated.
+- Numerator and denominator can be negative.
+    - Whenever reduce_fraction function is called, it should also check for negatives.
+    - If both numerator and denominator are negative, it should turn them both positive.
+    - If just numerator is negative, leave it how it is.
+    - If denominator is negative, make that positive and make the numerator negative.
+
+
+How to add fractions:
+
+1. Multiply numerator 1 and denominator 1 by denominator 2
+2. Multiply nunmerator 2 and denominator 2 by denominator 1
+3. Add numerators
+4. Reduce
