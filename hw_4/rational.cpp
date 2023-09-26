@@ -25,7 +25,7 @@ Rational::Rational(int n, int d) {
     }
     catch (std::string error_msg) {
 
-        std::cerr << "Error: " << error_msg;
+        std::cerr << "Error: " << error_msg << std::endl;
         exit(EXIT_FAILURE);
 
     }

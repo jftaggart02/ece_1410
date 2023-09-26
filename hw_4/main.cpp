@@ -94,7 +94,8 @@ int main() {
         }
 
         // Print result
-        cout << fraction.get_numerator() << "/" << fraction.get_denominator() << endl;
+        cout << "Result: "
+        << fraction.get_numerator() << "/" << fraction.get_denominator() << endl;
 
     }
 
