@@ -6,6 +6,10 @@
 
 using namespace std;
 
+bool is_fraction_good(float numerator, float denominator);
+
+bool is_selection_good(float selection);
+
 int main() {
 
     float numerator_float;
@@ -19,31 +23,17 @@ int main() {
     cout << "Enter denominator: ";
     cin >> denominator_float;
 
-    int numerator = (int) numerator_float;
-    int denominator = (int) denominator_float;
+    // Check for illegal fraction input.
+    if (!is_fraction_good(numerator_float, denominator_float)) {
 
-    // Check for illegal input
-    try {
-
-        if (denominator == 0) {
-
-            throw string("Cannot divide by 0!");
-
-        }
-        else if (numerator == 0) {
-
-            throw string("Fraction cannot be 0!");
-
-        }
-
-    }
-    catch (string error_msg) {
-
-        cerr << "Error: " << error_msg << std::endl;
-        cout << "Please try again." << endl;
+        // Go to the beginning and ask for input again if invalid input is given
         goto start;
 
     }
+
+    // Cast input to int to instantiate Rational class
+    int numerator = (int) numerator_float;
+    int denominator = (int) denominator_float;
 
     // Instantiate Rational object
     Rational fraction(numerator, denominator);
@@ -69,24 +59,15 @@ int main() {
         cout << "Enter selection: ";
         cin >> selection_float;
 
-        int selection = (int) selection_float;
-
         // Check for illegal selection
-        try {
-            if (selection < 0 || selection > 4) {
+        if (!is_selection_good(selection_float)) {
 
-                throw string("Invalid selection! Please try again.");
-
-            }
-        }
-        catch (string err_msg) {
-
-            cerr << "Error: " << err_msg << endl;
-
-            // Re-start loop
+            // If illegal selection was given, go back to the beginning of the loop.
             continue;
 
         }
+
+        int selection = (int) selection_float;
 
         // Exit if selection was 0
         if (selection == 0) {
@@ -102,31 +83,17 @@ int main() {
         cout << "Enter denominator: ";
         cin >> operator_d_float;
 
-        int operator_n = (int) operator_n_float;
-        int operator_d = (int) operator_d_float;
-
         // Check for illegal fraction input
-        try {
+        if (!is_fraction_good(operator_n_float, operator_d_float)) {
 
-            if (operator_d == 0) {
-
-                throw string("Cannot divide by 0!");
-
-            }
-            else if (operator_n == 0) {
-
-                throw string("Fraction cannot be 0!");
-
-            }
-
-        }
-        catch (string error_msg) {
-
-            cerr << "Error: " << error_msg << std::endl;
-            cout << "Please try again." << endl;
+            // If illegal input was given, go back to the beginning of the loop.
             continue;
 
         }
+
+        // Cast to ints for fraction operations
+        int operator_n = (int) operator_n_float;
+        int operator_d = (int) operator_d_float;
 
         // Perform selected operation
         switch (selection) {
@@ -153,4 +120,114 @@ int main() {
     }
 
     return 0;
+}
+
+bool is_fraction_good(float numerator, float denominator) {
+
+    // 1. Check to see if fraction contains a float.
+    try {
+
+        float numerator_copy = numerator;
+
+        // Chop off the digits after the decimal
+        numerator_copy = (int) numerator_copy;
+
+        // Compare numerator to int equivalent
+        if (numerator_copy != numerator) {
+
+            throw string("Error: input contains a floating-point number.");
+
+        }
+
+        float denominator_copy = denominator;
+
+        // Chop off the digits after the decimal
+        denominator_copy = (int) denominator_copy;
+
+        if (denominator_copy != denominator) {
+
+            throw string("Error: input contains a floating-point number.");
+
+        }
+
+
+    }
+    catch (string err_msg) {
+
+        cerr << err_msg << endl;
+        return false; 
+
+    }
+
+    // 2. Check to see if either numerator or denominator is 0
+    try {
+
+        if ((int) numerator == 0) {
+
+            throw string("Error: fraction cannot be 0.");
+
+        }
+        else if ((int) denominator == 0) {
+
+            throw string("Error: cannot divide by 0.");
+
+        }
+
+    }
+    catch (string err_msg) {
+
+        cerr << err_msg << endl;
+        return false;
+
+    }
+
+    return true;
+
+}
+
+bool is_selection_good(float selection) {
+
+    // Check for floats
+    try {
+
+        float selection_copy = selection;
+
+        // Chop off the digits after the decimal
+        selection_copy = (int) selection_copy;
+
+        // Compare numerator to int equivalent
+        if (selection_copy != selection) {
+
+            throw string("Error: input contains a floating-point number.");
+
+        }
+
+    }
+    catch (string err_msg) {
+
+        cerr << err_msg << endl;
+        return false;
+
+    }
+
+    // Check for input out of the acceptible range.
+    int selection_int = (int) selection;
+    try {
+
+        if (selection_int < 0 || selection_int > 4) {
+
+            throw string("Error: invalid selection.");
+
+        }
+
+    }
+    catch (string err_msg) {
+
+        cerr << err_msg << endl;
+        return false;
+
+    }
+
+    return true;
+
 }
