@@ -2,21 +2,48 @@
 #include <iostream>
 #include <string>
 #define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
 
 using namespace std;
 
 int main() {
 
-    int numerator;
-    int denominator;
+    float numerator_float;
+    float denominator_float;
+
+    start:
 
     // Ask for initial numerator and denominator
     cout << "Enter numerator: ";
-    cin >> numerator;
+    cin >> numerator_float;
     cout << "Enter denominator: ";
-    cin >> denominator;
+    cin >> denominator_float;
 
-    // Check for illegal input?
+    int numerator = (int) numerator_float;
+    int denominator = (int) denominator_float;
+
+    // Check for illegal input
+    try {
+
+        if (denominator == 0) {
+
+            throw string("Cannot divide by 0!");
+
+        }
+        else if (numerator == 0) {
+
+            throw string("Fraction cannot be 0!");
+
+        }
+
+    }
+    catch (string error_msg) {
+
+        cerr << "Error: " << error_msg << std::endl;
+        cout << "Please try again." << endl;
+        goto start;
+
+    }
 
     // Instantiate Rational object
     Rational fraction(numerator, denominator);
@@ -38,9 +65,11 @@ int main() {
         << "0. Exit" << endl;
 
         // Ask for selection
-        int selection;
+        float selection_float;
         cout << "Enter selection: ";
-        cin >> selection;
+        cin >> selection_float;
+
+        int selection = (int) selection_float;
 
         // Check for illegal selection
         try {
@@ -65,15 +94,39 @@ int main() {
         }
 
         // Ask for fraction input
-        int operator_n;
-        int operator_d;
+        float operator_n_float;
+        float operator_d_float;
 
         cout << "Enter numerator: ";
-        cin >> operator_n;
+        cin >> operator_n_float;
         cout << "Enter denominator: ";
-        cin >> operator_d;
+        cin >> operator_d_float;
 
-        // Check for illegal fraction input?
+        int operator_n = (int) operator_n_float;
+        int operator_d = (int) operator_d_float;
+
+        // Check for illegal fraction input
+        try {
+
+            if (operator_d == 0) {
+
+                throw string("Cannot divide by 0!");
+
+            }
+            else if (operator_n == 0) {
+
+                throw string("Fraction cannot be 0!");
+
+            }
+
+        }
+        catch (string error_msg) {
+
+            cerr << "Error: " << error_msg << std::endl;
+            cout << "Please try again." << endl;
+            continue;
+
+        }
 
         // Perform selected operation
         switch (selection) {

@@ -8,28 +8,6 @@
 
 Rational::Rational(int n, int d) {
 
-    // Check for illegal input (either numerator or denominator being 0)
-    try {
-
-        if (d == 0) {
-
-            throw std::string("Cannot divide by 0!");
-
-        }
-        else if (n == 0) {
-
-            throw std::string("Fraction cannot be 0!");
-
-        }
-
-    }
-    catch (std::string error_msg) {
-
-        std::cerr << "Error: " << error_msg << std::endl;
-        exit(EXIT_FAILURE);
-
-    }
-
     // Set numerator and denominator to given values
     m_numerator = n;
     m_denominator = d;
