@@ -1,0 +1,143 @@
+Brain dump:
+
+
+Variables
+
+Types: int, float, bool, char
+Conversion: char -> short -> int -> long -> float -> double
+Scope: A variable is visible in the scope it is defined in. For example, if a variable
+is defined within a function, you can't use it outside a function.
+- Also, if you define a variable outside a function, but you have a variable with
+the same name inside said function, the inside variable takes precedence over the 
+outside variable.
+Constant type: If a variable is defined as constant, if you try to modify it, the 
+compiler will throw an error.
+Static variables: if a static variable is defined within a function, it is initialized
+once, and it keeps the same value between function calls.
+Example: if it was initialized to 100 and the first function call changed it to 
+50, if you call the function again, the value of that variable will still be 50.
+
+
+Streams
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+cin >> var_name;
+cout << "text" << var_name << 123.90 << endl;
+cout << fixed << setprecision(3) << 123.34343434; // prints "123.343"
+
+
+fstream:
+
+#include <fstream>
+#include <iostream>
+
+using namespace std;
+
+ifstream input_file;
+ofstream output_file;
+
+input_file.open("input.txt");
+output_file.open("output.txt");
+
+char character_gotten;
+
+while (input_file.get(character_gotten)) {
+
+    output_file << "I read: " << character_gotten << endl;
+
+}
+
+input_file.close();
+
+output_file << "Done reading file." << endl;
+
+output_file.close();
+
+
+Functions
+
+Passing by reference: When you pass a variable by reference, when you modify that
+variable within the function, it also modifies the variable you passed to the function.
+- Example:
+
+int variable = 10;
+
+void change_variable(int &variable_to_change) {
+    variable_to_change += 10;
+}
+
+change_variable(variable); // variable is now 20
+
+Alias in for loop:
+
+int array[3] = { 3, 4, 5 };
+
+for (int &element : array) {
+    element += 5;
+}
+
+// array now contains 8, 9, 10
+
+Passing arrays by reference:
+
+int array[5] = {1, 2, 3, 4, 5};
+
+void print_array(int (&array_alias)[5]) {
+    for (int element : array_alias) {
+        std::cout << element << endl;
+    }
+}
+
+
+Pointers and arrays
+
+Accessing array elements using pointers: 
+
+int array[5] = {1, 2, 3, 4, 5};
+int * ptr = array;
+
+for (int i = 0; i < 5; i++) {
+    std::cout << *(ptr + i) << endl;
+}
+
+
+Classes
+
+class Vector {
+
+        int m_a;
+        int m_b;
+
+    public:
+
+        Vector();
+        Vector(int, int);
+        Vector operator+(int);
+        Vector operator+(Vector);
+
+};
+
+Vector::Vector() : m_a(0), m_b(0) {
+
+}
+
+Vector::Vector(int a, int b) : m_a(a), m_b(b) {
+
+}
+
+Vector::operator+(int scalar) {
+    Vector john_cena(this->m_a, this->m_b);
+    john_cena.m_a += scalar;
+    john_cena.m_b += scalar;
+    return john_cena;
+}
+
+Vector::operator+(Vector right_side) {
+    Vector john_cena(this->m_a, this->m_b);
+    john_cena.m_a += right_side.m_a;
+    john_cena.m_b += right_side.m_b;
+    return john_cena;
+}
