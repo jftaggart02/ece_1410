@@ -1,0 +1,27 @@
+1. Puzzle solver - bool Sudoku:solve()
+
+solve {
+
+    // Find first empty entry
+    // If no empty entries, return true (puzzle solved)
+
+    // Find first number that works
+    loop 1 through 9 {
+
+        if current number worked, call solve again
+        if that returned true, puzzle is solved!
+        if that returned false, we need to continue with this loop
+
+    }
+
+    if we made it to this point, we couldn't find a number that worked, so we should return false
+
+}
+
+2. Puzzle generator - Sudoku::Sudoku(int n)
+
+3. Puzzle printer - void Sudoku::printGrid()
+
+4. Puzzle reader - std::istream &operator>>(std::istream &input, Sudoku &s)
+
+Sudoku::getValue(int i, int j)
