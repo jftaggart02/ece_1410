@@ -18,10 +18,41 @@ solve {
 
 }
 
+-------------------------------------------------------------------------------
+
 2. Puzzle generator - Sudoku::Sudoku(int n)
+
+Function: generate n unique, random index pairs whose components are
+values from 0 to 8. Then set the grid spaces with those indices to 0.
+
+for (loop n times)
+    while (we still need a unique pair)
+        generate random pair
+        if it's equivalent to a pair already generated,
+            keep going
+        if it's not,
+            add it to the list
+            break out of loop
+    endwhile
+endfor
+
+we need an object that has two components: x and y
+we need to create an array of those objects (index list)
+
+class indexPair {
+    public:
+        int x;
+        int y;
+};
+
+-------------------------------------------------------------------------------
 
 3. Puzzle printer - void Sudoku::printGrid()
 
+-------------------------------------------------------------------------------
+
 4. Puzzle reader - std::istream &operator>>(std::istream &input, Sudoku &s)
+
+-------------------------------------------------------------------------------
 
 Sudoku::getValue(int i, int j)

@@ -1,7 +1,14 @@
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
+
+class indexPair {
+    public:
+        int x;
+        int y;
+};
 
 class Sudoku {
 
@@ -50,7 +57,82 @@ Sudoku::Sudoku() {
 // May not need this one to work
 Sudoku::Sudoku(int n) {
 
-    
+    // Create new list of index pairs of size "n"
+    indexPair *index_list = new indexPair[n];
+
+    // Fill the list with n random, unique index pairs
+    for (int i = 0; i < n; i++) {
+
+        int x;
+        int y;
+        bool unique_pair = false;
+
+        // While we still need a unique pair of indices
+        while (unique_pair == false) {
+
+            // Generate random pair of indices with values from 0 - 8
+            x = rand() % 9;
+            y = rand() % 9;
+
+            // Innocent until proven guilty, so to speak
+            unique_pair = true;
+            
+            // Loop through existing entries in our list
+            for (int j = 0; j < i; j++) {
+
+                // If the generated pair matches an existing entry
+                if (index_list[j].x == x && index_list[j].y == y) {
+
+                    // The generated pair is not unique
+                    unique_pair = false;
+
+                }
+
+            }
+
+        }
+
+        index_list[i].x = x;
+        index_list[i].y = y;
+
+    }
+
+    // Next, generate a random sudoku grid and fill in a 0 at the above
+    // specified indices.
+    for (int i = 0; i < 9; i++) {
+
+        for (int j = 0; j < 9; j++) {
+
+            // If i and j match a pair in the index list, set that 
+            // grid spot to 0
+
+            bool zero_spot = false;
+
+            for (int k = 0; k < n; k++) {
+
+                if (index_list[k].x == i && index_list[k].y == j) {
+
+                    zero_spot = true;
+
+                }
+
+            }
+
+            if (zero_spot == true) {
+
+                this->grid[i][j] = 0;
+
+            }
+
+            else {
+
+                this->grid[i][j] = rand() % 9 + 1;
+
+            }
+
+        }
+
+    }
 
 }
 
@@ -67,13 +149,9 @@ void Sudoku::setValue(int row, int col, int value) {
 
 bool Sudoku::scanCol(int col, int number) {
 
-    cout << "Entered scanCol\n";
-
     for (int row_scan = 0; row_scan < 9; row_scan++) {
 
         if (this->grid[row_scan][col] == number) {
-
-            cout << "returned true\n";
 
             // We found given number in the row
             return true;
@@ -81,8 +159,6 @@ bool Sudoku::scanCol(int col, int number) {
         }
 
     }
-
-    cout << "returned false\n";
 
     // We didn't find given number in the column
     return false;
@@ -91,13 +167,10 @@ bool Sudoku::scanCol(int col, int number) {
 
 bool Sudoku::scanRow(int row, int number) {
 
-    cout << "entered scanRow\n";
     
     for (int col_scan = 0; col_scan < 9; col_scan++) {
 
         if (this->grid[row][col_scan] == number) {
-
-            cout << "returned true\n";
 
             // We found given number in the row
             return true;
@@ -106,16 +179,12 @@ bool Sudoku::scanRow(int row, int number) {
 
     }
 
-    cout << "returned false\n";
-
     // We didn't find given number in the row
     return false;
 
 }
 
 bool Sudoku::scanBox(int row, int col, int number) {
-
-    cout << "Entered scanBox\n";
 
     int row_min, row_max, col_min, col_max;
 
@@ -125,9 +194,6 @@ bool Sudoku::scanBox(int row, int col, int number) {
         // j goes from 0 to 3 to 6
         for (int j = 0; j <= 6; j += 3) {
 
-            cout << "i = " << i << endl;
-            cout << "j = " << j << endl;
-
             // Set row min and max for scan based on given row and column
             if (row >= i && row <= (i+2) && col >= j && col <= (j+2)) {
 
@@ -135,11 +201,6 @@ bool Sudoku::scanBox(int row, int col, int number) {
                 row_max = i+2;
                 col_min = j;
                 col_max = j+2;
-
-                cout << "row_min: " << row_min << endl;
-                cout << "row_max: " << row_max << endl;
-                cout << "col_min: " << col_min << endl;
-                cout << "col_max: " << col_max << endl;
 
             }
 
@@ -155,8 +216,6 @@ bool Sudoku::scanBox(int row, int col, int number) {
 
         // If we didn't find a number that matched,
         if (col_scan == col_max && row_scan == row_max) {
-
-            cout << "returned false\n";
 
             return false;
 
@@ -178,8 +237,6 @@ bool Sudoku::scanBox(int row, int col, int number) {
         }
 
     }
-
-    cout << "returned true\n";
 
     // If we made it to this point, we found given number in the box
     return true;
@@ -220,12 +277,8 @@ bool Sudoku::solve() {
             
     }
 
-    cout << "Solving at " << row << " " << col << endl;
-
     // Find first number that works
     for (int number = 1; number <= 9; number++) {
-
-        cout << "Trying " << number << endl;
 
         if (
 
@@ -241,16 +294,8 @@ bool Sudoku::solve() {
         )
         {
 
-            cout << number << " worked" << endl;
-
             // If given number worked, set current spot to that number
             this->grid[row][col] = number;
-
-            cout << "Updated grid:\n";
-
-            this->printGrid();
-
-            cout << "moving on\n";
 
             // Call Sudoku::solve() again
             // if that returned true, puzzle is solved!
@@ -264,13 +309,7 @@ bool Sudoku::solve() {
             // if that returned false, we need to reset the current spot and continue with this loop
             else {
 
-                cout << "Something further down the line failed. Reverting to previous step: \n";
-
                 this->grid[row][col] = 0;
-
-                this->printGrid();
-
-                cout << "Trying more numbers\n";
 
             }
 
@@ -330,31 +369,18 @@ void Sudoku::printGrid() {
 
 }
 
-/*---------------------------------------------------------------------------*/
 
 int main() {
 
-    ifstream puzzleIn("input_puzzle.txt");
-    Sudoku puzzle;
-
-    puzzleIn >> puzzle;
+    Sudoku puzzle(60);
 
     puzzle.printGrid();
 
-    if (puzzle.solve()) {
+    puzzle.solve();
 
-        cout << "Puzzle solved!" << endl;
-
-    }
-
-    else {
-
-        cout << "Puzzle not solved." << endl;
-
-    }
+    cout << endl;
 
     puzzle.printGrid();
 
     return 0;
-    
 }

@@ -1,7 +1,14 @@
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
+
+class indexPair {
+    public:
+        int x;
+        int y;
+};
 
 class Sudoku {
 
@@ -50,7 +57,82 @@ Sudoku::Sudoku() {
 // May not need this one to work
 Sudoku::Sudoku(int n) {
 
-    
+    // Create new list of index pairs of size "n"
+    indexPair *index_list = new indexPair[n];
+
+    // Fill the list with n random, unique index pairs
+    for (int i = 0; i < n; i++) {
+
+        int x;
+        int y;
+        bool unique_pair = false;
+
+        // While we still need a unique pair of indices
+        while (unique_pair == false) {
+
+            // Generate random pair of indices with values from 0 - 8
+            x = rand() % 9;
+            y = rand() % 9;
+
+            // Innocent until proven guilty, so to speak
+            unique_pair = true;
+            
+            // Loop through existing entries in our list
+            for (int j = 0; j < i; j++) {
+
+                // If the generated pair matches an existing entry
+                if (index_list[j].x == x && index_list[j].y == y) {
+
+                    // The generated pair is not unique
+                    unique_pair = false;
+
+                }
+
+            }
+
+        }
+
+        index_list[i].x = x;
+        index_list[i].y = y;
+
+    }
+
+    // Next, generate a random sudoku grid and fill in a 0 at the above
+    // specified indices.
+    for (int i = 0; i < 9; i++) {
+
+        for (int j = 0; j < 9; j++) {
+
+            // If i and j match a pair in the index list, set that 
+            // grid spot to 0
+
+            bool zero_spot = false;
+
+            for (int k = 0; k < n; k++) {
+
+                if (index_list[k].x == i && index_list[k].y == j) {
+
+                    zero_spot = true;
+
+                }
+
+            }
+
+            if (zero_spot == true) {
+
+                this->grid[i][j] = 0;
+
+            }
+
+            else {
+
+                this->grid[i][j] = rand() % 9 + 1;
+
+            }
+
+        }
+
+    }
 
 }
 
