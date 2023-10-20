@@ -10,6 +10,9 @@
 
 std::string names[10] = {"Jacob", "Melinda", "Dessie", "Andrew", "Hannah", "April", "Roxie", "Flopsy", "Red Tail", "Shadow" };
 
+/*---------------------------------------------------------------------------*/
+// LIST
+
 TEST(IntList, Insert)
 {
   List<int> list;
@@ -230,6 +233,9 @@ TEST(StringList, reset)
   EXPECT_EQ(0, list.count());
 }
 
+/*---------------------------------------------------------------------------*/
+// STACK
+
 TEST(IntStack, pushPopTop)
 {
   Stack<int> stack;
@@ -305,6 +311,9 @@ TEST(StringStack, reset)
   stack.push("9999");
   EXPECT_EQ("9999", stack.top());
 }
+
+/*---------------------------------------------------------------------------*/
+// QUEUE
 
 TEST(IntQueue, enqueueDequeueFront)
 {

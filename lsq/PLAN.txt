@@ -1,0 +1,38 @@
+LINKED LIST
+
+List should support int and string
+
+List indexing:
+
+    /Head/ 0 1 2 3 4 5 6 7 8 9 /Tail/
+
+private variables:
+    Node<T> *head // Points to the head node
+    Node<T> *tail // Points to the tail node
+
+public functions:
+    List // default constructor
+
+    void insert(T) // Insert at Tail
+        1. Create node with given value. Pointer of that node is null.
+        2. If head and tail point to null (empty case), make both head and tail
+            point to new node
+        3. Otherwise, have the tail node point to the new node
+        4. Then, make tail point to the new node
+    
+    T at(int) // Returns the value stored at a given list index
+
+    int count(void) // Returns the number of nodes in the list
+
+    bool contains(T) // Returns true if the list contains given value. False otherwise
+
+    void remove(T) // Remove the node with the given value
+
+    string toString(void) // Converts each node value to a string and 
+        concatenates them into a string with spaces between the values
+
+    void reset(void) // Deletes all nodes
+
+STACK
+
+QUEUE
