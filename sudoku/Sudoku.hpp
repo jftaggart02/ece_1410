@@ -23,7 +23,7 @@ private:
 public:
 
     Sudoku();
-    Sudoku(int n);
+    Sudoku(int n = 81);
 
     bool solve();
 

@@ -23,7 +23,7 @@ private:
 public:
 
     Sudoku();
-    Sudoku(int n);
+    Sudoku(int n = 0);
 
     bool solve();
 
@@ -372,13 +372,21 @@ void Sudoku::printGrid() {
 
 int main() {
 
-    Sudoku puzzle(60);
+    Sudoku puzzle(81);
 
     puzzle.printGrid();
 
-    puzzle.solve();
+    cout << endl;
+
+    fstream input_puzzle("input_puzzle.txt");
+
+    input_puzzle >> puzzle;
+
+    puzzle.printGrid();
 
     cout << endl;
+
+    puzzle.solve();
 
     puzzle.printGrid();
 
