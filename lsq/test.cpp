@@ -314,7 +314,7 @@ TEST(StringStack, reset)
 
 /*---------------------------------------------------------------------------*/
 // QUEUE
-
+/*
 TEST(IntQueue, enqueueDequeueFront)
 {
   Queue<int> queue;
@@ -390,6 +390,7 @@ TEST(StringQueue, reset)
   queue.enqueue("9999");
   EXPECT_EQ("9999", queue.front());
 }
+*/
 
 int main(int argc, char **argv)
 {

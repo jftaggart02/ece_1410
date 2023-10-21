@@ -38,4 +38,17 @@ public functions:
 
 STACK
 
+public functions:
+    int count(void) // Counts number of items in stack
+        // same as list count
+
+    T top(void) // Returns value at top of stack
+
+    void push(T) // Pushes value to top of stack
+
+    T pop(void) // Returns the value popped from top of stack
+
+    void reset(void) // Removes all items from stack
+        // same as list reset
+
 QUEUE

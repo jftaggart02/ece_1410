@@ -27,7 +27,7 @@ class List {
 
         void reset(void); // Deletes all nodes
 
-    private:
+    protected:
 
         Node<T> *head; // Points to the head node
         // Node<T> *tail; // Points to the tail node
