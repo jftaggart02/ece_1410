@@ -51,4 +51,17 @@ public functions:
     void reset(void) // Removes all items from stack
         // same as list reset
 
-QUEUE
+QUEUE - inherits from stack, which inherits from list
+
+    void enqueue(T) // Pushes node with given value to back of queue
+        // Same as insert from list
+
+    T dequeue(void) // Returns value at front of queue and dequeues it
+        // Same as pop from Stack.hpp
+
+    T front(void) // Returns value at front of queue
+        // Same as top from stack.hpp
+
+    int count(void) // Same as other count functions
+
+    reset // Same as other reset functions
