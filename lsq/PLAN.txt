@@ -27,6 +27,9 @@ public functions:
     bool contains(T) // Returns true if the list contains given value. False otherwise
 
     void remove(T) // Remove the node with the given value
+        How to remove a node:
+            1. set prev to current.next
+            2. delete current
 
     string toString(void) // Converts each node value to a string and 
         concatenates them into a string with spaces between the values
