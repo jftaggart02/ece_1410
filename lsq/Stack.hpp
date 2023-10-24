@@ -35,6 +35,13 @@ T Stack<T>::top(void) { // Returns value at top of stack
 
     }
 
+    // If list is empty
+    else {
+
+        return 0;
+
+    }
+
 }
 
 template <typename T>
@@ -71,6 +78,13 @@ T Stack<T>::pop(void) { // Returns the value popped from top of stack
 
         // Return its data
         return data;
+
+    }
+
+    // If list is empty
+    else {
+
+        return 0;
 
     }
     

@@ -2,6 +2,7 @@
 #define LIST_HPP
 
 #include <sstream>
+#include <type_traits>
 
 using namespace std;
 
@@ -154,6 +155,13 @@ T List<T>::at(int index) { // Returns the value stored at a given list index
             return current->getData();
 
         }
+
+    }
+
+    // If list is empty
+    else {
+
+        return 0;
 
     }
 
