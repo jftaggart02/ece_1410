@@ -1,0 +1,72 @@
+Bounced check (insufficient funds):
+    immediately withdraw $25 plus check fee
+
+Checks:
+    Transactions reflect immediately on balance
+    Check fees are processed at next udpate
+
+Loans:
+    No max limit on loans
+    Interest is charged for loans at each udpate
+        balance * interest_rate
+
+Savings accounts accrue interest
+    Interest is credited at each udpate
+        balance * interest_rate
+
+Attempts made to withdraw more than available are rejected.
+
+Transaction file:
+    
+
+
+Bank:
+    constructor:
+        SET HEAD TO nullptr!
+
+
+    int process(string line)
+        turn line into stringstream
+        cin >> action_type
+        switch (action_type):
+            case s: // Create Savings acct
+                cin >> acct_num
+                cin >> name
+                cin >> initial balance
+                cin >> interest rate
+                create savings account with given info
+            case c: // Create Checking acct
+                cin >> acct_num
+                cin >> name
+                cin >> initial balance
+                cin >> fee for processed checks
+                create checking account with given info
+            case l: // Create Loan acct
+                cin >> acct_num
+                cin >> name
+                cin >> initial balance
+                cin >> interest rate
+                create loan account with given info
+            case t: // transaction
+                cin >> acct_num
+                cin >> amount of transaction
+                perform transaction on account
+            case u: // update
+                cin >> acct_num
+                perform update on account
+
+    void account(account info):
+        dynamically allocate memory to construct account with info
+        new_acct->setNext(head)
+        this->head = new_acct
+        increment this->accounts by 1
+
+    Account *findNumber(int acct_num):
+        Account * current = this->head;
+        do:
+            if current->getAcctNum() == acct_num:
+                return current;
+            else:
+                current = current->getNext();
+        while current_acct->getNext() != nullptr
+
