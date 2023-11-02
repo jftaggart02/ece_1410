@@ -75,6 +75,7 @@ int Bank::process(string line) {
 			line_stream >> interest;
 			// Create savings account with given info
 			account('s', acc_number, acc_name, balance, interest);
+			return 1;
 			break;
 		case 'c': // Create Checking acct
 			// Get account info
@@ -84,6 +85,7 @@ int Bank::process(string line) {
 			line_stream >> check_fee;
 			// Create checking account with given info
 			account('c', acc_number, acc_name, balance, check_fee);
+			return 1;
 			break;
 		case 'l': // Create Loan acct
 			// Get account info
@@ -93,6 +95,7 @@ int Bank::process(string line) {
 			line_stream >> interest;
 			// Create loan account with given info
 			account('l', acc_number, acc_name, balance, interest);
+			return 1;
 			break;
 		case 't': // transaction
 			// Get transaction info
@@ -100,15 +103,18 @@ int Bank::process(string line) {
 			line_stream >> trans_amount;
 			// Perform transaction on amount
 			this->findNumber(acc_number)->transaction(trans_amount);
+			return 1;
 			break;
 		case 'u': // update
 			// Get account number
 			line_stream >> acc_number;
 			// Update account
 			this->findNumber(acc_number)->update();
+			return 1;
 			break;
 		default:
 			// Not sure what to do. Probably don't need this
+			return 0;
 	}
 
 }
@@ -118,22 +124,27 @@ void Bank::account(char f_letter, int acc_number, string acc_name, float balance
 
 	Account * new_account;
 
+	float check_fee = interest;
+
 	switch (f_letter) {
 
 		case 's':
 			// dynamically allocate memory to construct account with info
-			new_account = new Savings('s', acc_number, acc_name, balance, interest);
+			new_account = new Savings(acc_number, acc_name, balance, interest);
 			break;
+
 		case 'c':
-			float check_fee = interest;
 			// dynamically allocate memory to construct account with info
-			new_account = new Checking('c', acc_number, acc_name, balance, check_fee);
+			new_account = new Checking(acc_number, acc_name, balance, check_fee);
 			break;
+
 		case 'l':
-			new_account = new Loan('l', acc_number, acc_name, balance, interest);
+			new_account = new Loan(acc_number, acc_name, balance, interest);
 			break;
+
 		default:
 			// Not sure what to do. Probably don't need this
+			new_account = nullptr;
 
 	}
 
@@ -161,6 +172,9 @@ Account *Bank::findNumber(int acc_num) {
 
 	}
 	while (current->getNext() != nullptr);
+
+	// If we made it to the end,
+	return nullptr;
 
 }
 

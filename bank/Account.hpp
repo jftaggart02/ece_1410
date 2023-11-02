@@ -34,4 +34,42 @@ class Account
 		
 };
 
+Account::Account(int acc_number, string acc_name, float balance, float interest) : 
+	acc_number(acc_number), balance(balance), interest(interest)
+{
+
+	
+
+}
+
+string Account::getName() {
+
+	return this->acc_name;
+
+}
+
+int Account::getAccNum() {
+	
+	return this->acc_number;
+
+}
+
+float Account::getBalance() {
+
+	return this->balance;
+
+}
+
+Account* Account::getNext() {
+
+	return this->next;
+
+}
+
+void Account::setNext(Account* _n) {
+
+	this->next = _n;
+
+}
+
 #endif
