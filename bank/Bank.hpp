@@ -16,6 +16,9 @@
 using namespace std;
 
 
+// #define DEBUG
+
+
 // FEEL FREE to ADD/DELETE Anything, but make sure it does not fail compilation of UNMODIFIED test.cpp
 class Bank {
 private:
@@ -52,12 +55,19 @@ Bank::Bank() {
 }
 
 int Bank::process(string line) {
+	#ifdef DEBUG
+	cout << "processing line.\n";
+	#endif
+
 	// Initialize stringstream with given line
 	stringstream line_stream(line);
 
 	char action_type;
 
 	line_stream >> action_type;
+	#ifdef DEBUG
+	cout << "Action type is:" << action_type << endl;
+	#endif
 
 	int acc_number;
 	string acc_name; 
@@ -74,6 +84,9 @@ int Bank::process(string line) {
 			line_stream >> balance;
 			line_stream >> interest;
 			// Create savings account with given info
+			#ifdef DEBUG
+			cout << "Creating Savings Account" << endl;
+			#endif
 			account('s', acc_number, acc_name, balance, interest);
 			return 1;
 			break;
@@ -84,6 +97,9 @@ int Bank::process(string line) {
 			line_stream >> balance;
 			line_stream >> check_fee;
 			// Create checking account with given info
+			#ifdef DEBUG
+			cout << "Creating Checking Account" << endl;
+			#endif
 			account('c', acc_number, acc_name, balance, check_fee);
 			return 1;
 			break;
@@ -94,6 +110,9 @@ int Bank::process(string line) {
 			line_stream >> balance;
 			line_stream >> interest;
 			// Create loan account with given info
+			#ifdef DEBUG
+			cout << "Creating Loan Account" << endl;
+			#endif
 			account('l', acc_number, acc_name, balance, interest);
 			return 1;
 			break;
@@ -102,6 +121,9 @@ int Bank::process(string line) {
 			line_stream >> acc_number;
 			line_stream >> trans_amount;
 			// Perform transaction on amount
+			#ifdef DEBUG
+			cout << "Performing transaction" << endl;
+			#endif
 			this->findNumber(acc_number)->transaction(trans_amount);
 			return 1;
 			break;
@@ -109,6 +131,9 @@ int Bank::process(string line) {
 			// Get account number
 			line_stream >> acc_number;
 			// Update account
+			#ifdef DEBUG
+			cout << "Updating account" << endl;
+			#endif
 			this->findNumber(acc_number)->update();
 			return 1;
 			break;
@@ -152,6 +177,9 @@ void Bank::account(char f_letter, int acc_number, string acc_name, float balance
 	new_account->setNext(head);
 	this->head = new_account;
 
+	// Increment account count
+	this->accounts ++;
+
 }
 
 Account *Bank::findNumber(int acc_num) {
@@ -171,7 +199,7 @@ Account *Bank::findNumber(int acc_num) {
 		}
 
 	}
-	while (current->getNext() != nullptr);
+	while (current != nullptr);
 
 	// If we made it to the end,
 	return nullptr;

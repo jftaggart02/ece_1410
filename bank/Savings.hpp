@@ -3,6 +3,8 @@
 
 #include "Account.hpp"
 
+// #define DEBUG
+
 class Savings : public Account {
     
     protected:
@@ -34,6 +36,10 @@ void Savings::update() {
 }
 
 void Savings::transaction(float trans) {
+
+    #ifdef DEBUG
+    cout << "Savings transaction" << endl;
+    #endif
 
     // If there are enough funds for transaction
     if (this->balance + trans >= 0) {

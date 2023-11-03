@@ -35,7 +35,7 @@ class Account
 };
 
 Account::Account(int acc_number, string acc_name, float balance, float interest) : 
-	acc_number(acc_number), balance(balance), interest(interest)
+	acc_number(acc_number), acc_name(acc_name), balance(balance), interest(interest)
 {
 
 	
