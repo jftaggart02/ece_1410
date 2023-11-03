@@ -58,21 +58,23 @@ void Checking::transaction(float trans) {
 
         this->balance += trans;
         
-        // Add a check fee at next update
-        this->num_fees++;
+        // Add a check fee at next update if trans is a withdrawal
+        if (trans < 0) {
+            this->num_fees++;
+        }
 
     }
 
     // If there aren't
     else {
 
-        cout << "Check bounced. Insufficient funds." << endl;
+        // cout << "Check bounced. Insufficient funds." << endl;
 
         // If there is at least enough for bounced check fee
-        if (this->balance >= (25 /*+ this->check_fee*/)) {
+        if (this->balance >= (25 + this->check_fee)) {
 
             // Immediately subtract bounced check fee plus regular check fee
-            this->balance -= (25 /*+ this->check_fee*/);
+            this->balance -= (25 + this->check_fee);
 
         }
         
