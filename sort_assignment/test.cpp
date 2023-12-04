@@ -72,7 +72,7 @@ TEST(BigSort, Bubble)
 
   checkArray(pArray, BIG);
 }
-/*
+
 TEST(SmallSort, Insertion)
 {
   int* pArray = generateRandomArray(SMALL);
@@ -97,7 +97,7 @@ TEST(BigSort,  Insertion)
 
   checkArray(pArray, BIG);
 }
-
+/*
 TEST(SmallSort, Quick)
 {
   int* pArray = generateRandomArray(SMALL);

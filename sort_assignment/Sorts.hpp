@@ -7,7 +7,7 @@ class Sorts
   public:
   void bubble(int*, int);
   
-  //void insertion(int*, int);
+  void insertion(int*, int);
   //void quick(int*, int);
   
   // Any Other Function you want to declare
@@ -40,5 +40,29 @@ void Sorts::bubble(int *data_array, int array_size) {
 	}	
 
 }
+
+void Sorts::insertion(int *data_array, int array_size) {
+
+	// Loop from index 1 to array_size - 1
+	for (int pass = 1; pass < array_size; pass++) {
+
+		// Compare value at current pass index with all previous values.
+		// Put the value at current pass index in its correct spot in the ordered list
+		for (int i = 0; i < pass; i++ ) {
+
+			if (data_array[pass] < data_array[i]) {
+
+				// Swap them
+				int temp = data_array[pass];
+				data_array[pass] = data_array[i];
+				data_array[i] = temp;
+
+			}
+
+		}
+
+	}
+
+} 
 
 #endif
