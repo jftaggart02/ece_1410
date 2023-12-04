@@ -1,4 +1,3 @@
-
 #ifndef SORTS_HPP
 #define SORTS_HPP
 
@@ -236,9 +235,29 @@ void Sorts::quick(int *array, int size) {
 		// 3. Partition List
 		pivot_index = partition(array, size, pivot_index);
 
-		// 4. Run quicksort on both sides of partition if applicable.
+		// 4. Run quicksort recursively
+		// If pivot is last element in array, run quicksort on only the left side
+		if (pivot_index == size-1) {
 
+			quick(array, size-1);
 
+		}
+		// If pivot is first element in array, run quicksort on only the right side
+		else if (pivot_index == 0) {
+
+			quick(array+1, size-1);
+
+		}
+		// Else, run quicksort on both sides
+		else {
+
+			// Left side
+			quick(array, pivot_index);
+			
+			// Right side
+			quick(array + pivot_index + 1, size - pivot_index + 1);
+
+		}
 	}
 
 }

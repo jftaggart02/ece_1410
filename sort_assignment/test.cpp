@@ -97,7 +97,7 @@ TEST(BigSort,  Insertion)
 
   checkArray(pArray, BIG);
 }
-/*
+
 TEST(SmallSort, Quick)
 {
   int* pArray = generateRandomArray(SMALL);
@@ -121,7 +121,7 @@ TEST(BigSort, Quick)
   sorter.quick(pArray, BIG);
 
   checkArray(pArray, BIG);
-}*/
+}
 int main(int argc, char **argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
