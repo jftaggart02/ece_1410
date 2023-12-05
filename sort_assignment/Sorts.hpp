@@ -11,18 +11,14 @@ class Sorts
 {
   public:
   void bubble(int*, int);
-  
   void insertion(int*, int);
   void quick(int*, int);
   
-  // Any Other Function you want to declare
-
   private:
   int select_pivot(int *array, int n);
   void swap (int *array, int index1, int index2);
   void printArray(int *array, int size);
   int partition(int *array, int n, int pivot_index);
-	  // Any Variables you will need
 
 };
 
@@ -131,17 +127,13 @@ int Sorts::partition(int *array, int n, int pivot_index) {
 	// 1: Swap pivot with last index
 	swap(array, pivot_index, n-1);
 	
-	#if DEBUG
-	//printArray(array, n);
-	#endif
-
 	// 2: We need iterators i and j
-	// i advances from left until it finds a value greater than pivot
-	// j advances from right until it finds a value less than pivot
-	// If i and j have crossed,
-		// swap i with pivot
-	// Else,
-		// swap i and j
+		// i advances from left until it finds a value greater than or equal to pivot
+		// j advances from right until it finds a value less than pivot
+		// If i and j have crossed,
+			// swap i with pivot
+		// Else,
+			// swap i and j
 	int i = 0;
 	int j = n-2;
 	while (true) {
@@ -183,10 +175,6 @@ int Sorts::partition(int *array, int n, int pivot_index) {
 			}
 
 		}
-
-		// If i == n-1, everything is less than the pivot
-
-		// If j == 0, everything is greater than the pivot
 		
 		// If i and j have crossed,
 		if (i >= j) {
@@ -205,15 +193,7 @@ int Sorts::partition(int *array, int n, int pivot_index) {
 
 		}
 
-		#if DEBUG
-		//printArray(array, n);
-		#endif
-
 	}
-
-	#if DEBUG
-	//printArray(array,n);
-	#endif
 
 	// Return the new pivot index
 	return i;
