@@ -1,56 +1,10 @@
-#ifndef SORTS_HPP
-#define SORTS_HPP
-
 #include <iostream>
 
 using namespace std;
 
-#define DEBUG 0
- 
-class Sorts
-{
-  public:
-  void bubble(int*, int);
-  
-  void insertion(int*, int);
-  void quick(int*, int);
-  
-  // Any Other Function you want to declare
+#define DEBUG 1
 
-  private:
-  int select_pivot(int *array, int n);
-  void swap (int *array, int index1, int index2);
-  void printArray(int *array, int size);
-  int partition(int *array, int n, int pivot_index);
-	  // Any Variables you will need
-
-};
-
-
-// IMPLEMENTATION --- YOUR CODE
-
-void Sorts::bubble(int *data_array, int array_size) {
-
-	for (int i = 0; i < array_size - 1; i++) {
-
-		for (int j = 0; j < array_size - 1 - i; j++) {
-
-			// If adjacent neighbors are out of order, swap them
-			if (data_array[j] > data_array[j+1]) {
-
-				int temp = data_array[j];
-				data_array[j] = data_array[j+1];
-				data_array[j+1] = temp;
-
-			}
-
-		}
-
-	}	
-
-}
-
-void Sorts::insertion(int *data_array, int array_size) {
+void insertion(int *data_array, int array_size) {
 
 	// Loop from index 1 to array_size - 1
 	for (int pass = 1; pass < array_size; pass++) {
@@ -74,7 +28,7 @@ void Sorts::insertion(int *data_array, int array_size) {
 
 } 
 
-int Sorts::select_pivot(int *array, int n) {
+int select_pivot(int *array, int n) {
 
 	int left = array[0];
 	int right = array[n-1];
@@ -106,7 +60,7 @@ int Sorts::select_pivot(int *array, int n) {
 
 }
 
-void Sorts::swap(int *array, int index1, int index2) {
+void swap(int *array, int index1, int index2) {
 
 	int temp = array[index1];
 	array[index1] = array[index2];
@@ -114,7 +68,7 @@ void Sorts::swap(int *array, int index1, int index2) {
 
 }
 
-void Sorts::printArray(int *array, int size) {
+void printArray(int *array, int size) {
 
 	for (int i = 0; i < size; i++) {
 
@@ -126,7 +80,7 @@ void Sorts::printArray(int *array, int size) {
 
 }
 
-int Sorts::partition(int *array, int n, int pivot_index) {
+int partition(int *array, int n, int pivot_index) {
 
 	// 1: Swap pivot with last index
 	swap(array, pivot_index, n-1);
@@ -220,7 +174,8 @@ int Sorts::partition(int *array, int n, int pivot_index) {
 
 }
 
-void Sorts::quick(int *array, int size) {
+
+void quick(int *array, int size) {
 
 	// 1: Check array size. If 1 or less, we're done.
 	if (size == 1) {
@@ -306,4 +261,16 @@ void Sorts::quick(int *array, int size) {
 
 }
 
-#endif
+int main() {
+
+	int array[] = {6, 3, 12, 10, 17, 4, 6, 7, 2, 14};
+
+	int n = 10;
+
+	quick(array, n);
+
+	printArray(array, n);
+
+	return 0;
+
+}
